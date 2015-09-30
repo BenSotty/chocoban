@@ -1,0 +1,17 @@
+// Colors
+$colorOne: midnightblue;
+$colorTwo: coral;
+$colorThree: silver;
+$white: #FAFAFA;
+$black: #333;
+
+// Reusables
+%link {
+    text-decoration: none;
+    color: $colorOne;
+    border-bottom: 2px solid $colorOne;
+    &:hover{
+        color: $colorTwo;
+        border-color: $colorTwo;
+    }
+}
