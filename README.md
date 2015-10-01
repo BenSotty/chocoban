@@ -1,2 +1,2 @@
 # chocoban
-Sokoban clone
+b600 Sokoban clone

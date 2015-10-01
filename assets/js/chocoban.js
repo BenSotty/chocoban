@@ -3,11 +3,28 @@ Chocoban = function(options) {
     // OPTIONS
     this.level = options.level ? options.level : 1;
     this.debug = options.debug ? options.debug : false;
+    this.levelsJsonUrl = options.levelsJsonUrl ? options.levelsJsonUrl : 'content/levels.json';
     this.ready = false;
 
+    // GLOBALS
+    var levelsJsonUrl = this.levelsJsonUrl,
+        levels,
+        state,
+        currentState;
+
+    // INIT
+    levels = getLevels();
+    currentState = parseLevel(this.level);
+    debugList = {
+        "level": this.level,
+        "ready": this.ready,
+        "debug": this.debug,
+        "levels": levels[1],
+        "currentLevel": currentState
+    };
+
     // LEVEL LOADING
-    var levelsJsonUrl = 'content/levels.json';
-    var getLevels = function() {
+    function getLevels() {
         var json = null;
         $.ajax({
             type: 'GET',
@@ -25,15 +42,13 @@ Chocoban = function(options) {
         })
         return json
     };
-    var levels = getLevels();
+    
 
     // UPDATE
-    var state = {},
-        currentState = {};
-
-    var parseLevel = function(levelDescription) {
+    function parseLevel(level) {
         //  multiple element = NumberSymbol (ex. 7#)
         //  Wall:           #
+        //  Trees:          ^
         //  Player:         @
         //  Player on Goal: +
         //  Box:            $
@@ -41,7 +56,14 @@ Chocoban = function(options) {
         //  Goal:           .
         //  Floor:          _
         //  linejump:       |
-        //  ex:             7#|#.@-#-#|#$*-$-#|#3-$-#|#-..--#|#--*--#|7#
+        //  ex:             "2^3#4^|2^#.#4^|2^#_4#^|3#$_$.#^|#._$@3#^|4#$#3^|3^#.#3^|3^3#3^|9^"
+        
+        var levelDescription = levels[level],
+            rows = levelDescription.split('|');
+        for (var row in rows){
+            rows[row] = rows[row].split('');
+        }
+        return rows;
     }
 
     // MOVEMENT
@@ -53,13 +75,7 @@ Chocoban = function(options) {
     }
 
     // DEBUGGING
-    var debugList = {
-        "level": this.level,
-        "ready": this.ready,
-        "debug": this.debug,
-        "levels": levels
-    };
-    var log = function(debugList) {
+    function log(debugList) {
         var object = debugList;
         for (var key in object) {
             if (object.hasOwnProperty(key)) {
@@ -73,6 +89,7 @@ Chocoban = function(options) {
 }
 
 var chocoTest = new Chocoban({
-    level: 3,
-    debug: true
+    level: 1,
+    debug: true,
+    levelsJsonUrl: 'content/levels.json'
 });
