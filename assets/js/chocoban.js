@@ -4,13 +4,34 @@ Chocoban = function (options) {
     this.level = options.level ? options.level : 1;
     this.debug = options.debug ? options.debug : false;
     this.ready = false;
-    this.levelFolder = '../../content/levels';
-    
+
+    var levelsJsonUrl = 'content/levels.json';
+    var getLevels = function(){
+        var json = null;
+        $.ajax({
+            type: 'GET',
+            url: levelsJsonUrl,
+            dataType: 'json',
+            global: false,
+            async: false,
+            success: function(data){
+                json = data;
+            },
+            error: function(jqxhr, textStatus, error){
+                console.log(error);
+                json = error;
+            }
+        })
+        return json
+    };
+    var levels = getLevels();
+
     // DEBUGGING
     var debugList = {
         "level": this.level,
         "ready": this.ready,
-        "debug": this.debug
+        "debug": this.debug,
+        "levels": levels
     };
     var log = function (debugList) {
         var object = debugList;
@@ -28,15 +49,6 @@ Chocoban = function (options) {
     var state = {},
         currentState = {};
 
-    // LEVEL LOADER
-    var loadLevel = function(level){
-        var requestUrl = this.levelFolder + '/' + level + '.txt';
-        $.getJSON(requestUrl)
-            .done(function (data) {
-            })
-            .fail(function( jqxhr, textStatus, error ) {
-            });
-    };
     var parseLevel = function(levelDescription){
         //  multiple element = NumberSymbol (ex. 7#)
         //  Wall:           #
@@ -57,6 +69,7 @@ Chocoban = function (options) {
         'd' : [0, 1],
         'l' : [-1, 0]
     }
+
 }
 
 var chocoTest = new Chocoban({
