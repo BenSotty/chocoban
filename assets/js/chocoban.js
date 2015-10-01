@@ -9,18 +9,17 @@ Chocoban = function(options) {
     // GLOBALS
     var levelsJsonUrl = this.levelsJsonUrl,
         levels,
-        state,
         currentState;
 
     // INIT
     levels = getLevels();
-    initState = parseLevel(this.level);
+    
+    this.initialState = parseLevel(this.level);
     debugList = {
-        "level": this.level,
-        "ready": this.ready,
-        "debug": this.debug,
-        "levels": levels[1],
-        "initial state": initState
+        "current level": this.level,
+        "current level description": this.initialState,
+        //"ready": this.ready,
+        "levels list": debugLevelsList(levels)
     };
 
     // LEVEL LOADING
@@ -36,7 +35,6 @@ Chocoban = function(options) {
                 json = data;
             },
             error: function(jqxhr, textStatus, error) {
-                console.log(error);
                 json = error;
             }
         })
@@ -67,6 +65,15 @@ Chocoban = function(options) {
     }
 
     // DEBUGGING
+    function debugLevelsList(object){
+        var list = [];
+        for (var key in object) {
+            if (object.hasOwnProperty(key)) {
+                list.push("(level " + key + ": " + object[key] + ")");
+            }
+        }
+        return list;
+    }
     function log(debugList) {
         var object = debugList;
         for (var key in object) {
