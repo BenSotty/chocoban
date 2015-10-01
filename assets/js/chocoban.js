@@ -14,13 +14,13 @@ Chocoban = function(options) {
 
     // INIT
     levels = getLevels();
-    currentState = parseLevel(this.level);
+    initState = parseLevel(this.level);
     debugList = {
         "level": this.level,
         "ready": this.ready,
         "debug": this.debug,
         "levels": levels[1],
-        "currentLevel": currentState
+        "initial state": initState
     };
 
     // LEVEL LOADING
@@ -64,14 +64,6 @@ Chocoban = function(options) {
             rows[row] = rows[row].split('');
         }
         return rows;
-    }
-
-    // MOVEMENT
-    var direction = {
-        'u': [0, -1],
-        'r': [1, 0],
-        'd': [0, 1],
-        'l': [-1, 0]
     }
 
     // DEBUGGING
