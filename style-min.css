@@ -1,0 +1,16 @@
+.chocoban-container{position:relative;background-color:#ddd}
+.chocoban-container .cell{position:absolute;-webkit-transition:all .3s ease;-moz-transition:all .3s ease;-o-transition:all .3s ease;transition:all .3s ease;color:#fff;text-align:center;z-index:1}
+.chocoban-container .cell.free{background-color:blue}
+.chocoban-container .cell.tree{background-color:green}
+.chocoban-container .cell.box,.chocoban-container .cell.boxOnBomb{background-color:brown}
+.chocoban-container .cell.box.onBomb,.chocoban-container .cell.boxOnBomb.onBomb{background-color:green}
+.chocoban-container .cell.player,.chocoban-container .cell.playerOnBomb{background-color:red}
+.chocoban-container .cell.wall{background-color:black}
+.chocoban-container .cell.onBomb{opacity:.9}
+.chocoban-container .cell.moving{border:solid 1px #fff;z-index:10}
+.chocoban-container .winTitle{position:absolute;top:0;left:0;bottom:0;right:0;text-align:center;background-color:rgba(0,0,0,0.7);z-index:100;color:#fff;margin:0}
+.chocoban-container.theme-grey .cell.free{background-color:#000}
+.chocoban-container.theme-grey .cell.tree{background-color:#323232}
+.chocoban-container.theme-grey .cell.box,.theme-grey .chocoban-container .cell.boxOnBomb{background-color:rgba(100,100,100)}
+.chocoban-container.theme-grey .cell.player,.chocoban-container .theme-grey .cell.playerOnBomb{background-color:rgba(150,150,150);color:#fff}
+.chocoban-container.theme-grey .cell.wall{background-color:black;color:#fff}
