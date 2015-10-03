@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="css files">
+<filelist id="css.files" dir="${dir.base}">
+  <!-- Chocoban css -->
+  <file name="${dir.base}/assets/css/chocoban.css"/>
+</filelist>
+</project>
