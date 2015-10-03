@@ -1,70 +1,32 @@
 <!DOCTYPE html>
 <html>
-<head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width,initial-scale=1.0">
-
+  <head>
+    <meta charset="UTF-8">
     <title>Chocoban</title>
-    <meta name="description" content="">
-    <meta name="keywords" content="">
-    
-    <!-- fb -->
-    <meta property="fb:admins" content="">
-    <meta property="og:locale" content="">
-    <meta property="og:site_name" content="">
-    <meta property="og:url" content="">
-    <meta property="og:type" content="website">
-    <meta property="og:title" content="">
-    <meta property="og:description" content="">
-    <meta property="og:image" content="">
-    <meta property="og:image:width" content="1280">
-    <meta property="og:image:width" content="800">
-    
-    <!-- twitter -->
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:site" content="">
-    <meta name="twitter:creator" content="">
-    <meta name="twitter:title" content="">
-    <meta name="twitter:description" content="">
-    <meta name="twitter:domain" content="">
-    <meta name="twitter:image" content="">
-    
-    <!-- favicon -->
-    <link rel="shortcut icon" href="">
-    
-    <!-- CSS -->
-    <link rel="stylesheet" href="assets/css/plugins.css">
-    <link rel="stylesheet" href="assets/css/main.css">
-
-    <!-- JS -->
-    <script type="text/javascript" src="assets/js/vendor/modernizr-custom-2.7.1.min.js">
-    </script>
-    
-    <script>
-    Modernizr.load([{
-        load: [
-               'timeout=2000!https://code.jquery.com/jquery-2.1.4.min.js'
-              ],
-        complete: function () {
-          if ( !window.jQuery ) {
-            Modernizr.load('assets/js/vendor/jquery-2.1.4.min.js');
-          }
-        
-        }
-      },
-      {
-        load: [
-            'assets/js/chocoban.js']
-      }
-    ]);
-    </script>
-    
-</head>
-<body>
-    <section class="header">
-    </section>
-    <main>
-    </main>
-    <footer>
-    </footer>
-</body>
+    <link href="style.css" rel="stylesheet">
+  </head>
+  <body>
+  <h1>Let's play Chocoban</h1>
+  <div id="chocoban-container" class="chocoban-container"></div>
+  <h1>Another Chocoban with another theme just for fun...</h1>
+  <div id="grey-chocoban-container" class="chocoban-container"></div>
+  <script src="app.js"></script>
+  <script>
+  //Main game
+   var game = new chocoban ({
+     id : "main-chocoban",
+     level : 1
+   });
+  //Let's play with it!
+   $(document).ready(game.start.call(game));
+  //Test with another theme
+  var greyGame = new chocoban ({
+    id : "grey-chocoban",
+    prefix : "grey",
+    theme : "theme-grey",
+    level : 1
+  });
+  $(document).ready(greyGame.start.call(greyGame));
+  </script>
+  </body>
+</html>
